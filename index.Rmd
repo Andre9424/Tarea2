@@ -1,28 +1,171 @@
 ---
-title: "Tarea2"
-output: html_document
+title: "Tarea 2 Graficacion - Andreina Vasquez Castro"
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+### Carga de paquetes
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+```{r carga-librerias, message=FALSE}
+# dplyr
+library(dplyr)
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+# ggplot2
+library(ggplot2)
 ```
 
-## Including Plots
+### Carga de datos
 
-You can also embed plots, for example:
+```{r carga-datos}
+rios <-
+  read.csv(file = 'https://raw.githubusercontent.com/tpb728O-programaciongeoespacialr/2021ii/main/datos/hidrologia/fdc/fdc.csv')
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+covid <- 
+  read.csv(
+    file='https://raw.githubusercontent.com/tpb728O-programaciongeoespacialr/2021ii/main/datos/minsalud/covid/ultimafecha_CSV_GENERAL.csv', 
+    sep = ","
+  )
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+### (40%) Gráfico de barras apiladas que muestre el caudal de los ríos Pandora y Bananito por cada uno de los 12 meses del año.
+
+```{r cambiar-nombre-sumar}
+# Cambiar nombre y sumar caudales de ambos rios
+rios_caudal_por_mes <-
+  rios %>%
+  rename(fecha = Tiempo,
+         pandora = Pandora.mm..637km2.,
+         banano = Banano.mm..90km2.) %>%
+  mutate(fecha = as.Date(fecha, format = "%m/%d/%Y")) %>%
+  group_by(mes = format(fecha,"%m")) %>%
+  summarise(pandora = sum(pandora), banano = sum(banano))
+
+rios_caudal_por_mes
+```
+
+```{r separar_tabla_pandora}
+# Separar tabla con datos de rio Pandora para normalizarla
+rios_caudal_por_mes$caudal = rios_caudal_por_mes$pandora 
+rios_caudal_por_mes$rio ="pandora"
+
+tabla_caudal_pandora <- data.frame(rios_caudal_por_mes$mes, rios_caudal_por_mes$caudal, rios_caudal_por_mes$rio)
+  
+tabla_caudal_pandora
+```
+
+```{r separar_tabla_banano}
+# Separar tabla con datos de rio Banano para normalizarla
+rios_caudal_por_mes$caudal = rios_caudal_por_mes$banano 
+rios_caudal_por_mes$rio ="banano" 
+  
+tabla_caudal_banano <- data.frame(rios_caudal_por_mes$mes, rios_caudal_por_mes$caudal, rios_caudal_por_mes$rio)
+
+tabla_caudal_banano
+```
+
+```{r tabla-normalizada-caudales}
+# Unir las tablas de ambos rios
+Datos_Caudal_Rios = rbind(tabla_caudal_pandora, tabla_caudal_banano)
+Datos_Caudal_Rios %>%
+rename(Mes = rios_caudal_por_mes.mes,
+         Caudal_Acumulado = rios_caudal_por_mes.caudal,
+         Rio = rios_caudal_por_mes.rio)
+```
+
+```{r grafico-barras-apiladas}
+# Grafico de barras apiladas de caudales acumulados por mes
+ggplot(
+  Datos_Caudal_Rios, 
+  aes(x = rios_caudal_por_mes.mes, y = rios_caudal_por_mes.caudal, fill = rios_caudal_por_mes.rio)) +
+  geom_col() +
+  ggtitle("Caudal acumulado por mes desde 1973 hasta 1983") +
+  xlab("Mes") +
+  ylab("Caudal m³/s") +
+  guides(fill = guide_legend(title = "Rios")) +
+  scale_fill_discrete(labels = c("Banano", "Pandora"))
+```
+
+### (20%) Histograma que muestre la distribución de los casos nuevos de covid en Costa Rica. Elija cuidadosamente el tamaño de los “bins”.
+
+```{r histograma}
+# Histograma de casos nuevos COVID-19
+ggplot(covid) +
+  geom_histogram(
+    aes(x = nue_posi),
+    bins = 15,
+    color = "cyan",
+    fill = "gray62"
+  ) +
+  ggtitle("Distribución de nuevos casos de contagio por COVID-19 en Costa Rica") +
+  xlab("Casos Nuevos") +
+  ylab("Frecuencia") +
+  scale_x_continuous(breaks = seq(1,3173,250))+
+  scale_y_continuous(breaks = seq(1,433,20))
+ 
+```
+
+### (40%) Gráfico de barras agrupadas que muestre la cantidad de hombres y mujeres fallecidos por covid en Costa Rica por cada uno de los 12 meses del año.
+
+
+```{r cambiar-nombre-sumar_2}
+# Cambiar nombre y sumar casos fallecidos por mes
+fallecidos_por_mes <-
+ covid %>%
+  rename(fecha = FECHA,
+         mujeres_fallecidas = muj_fall,
+         Hombres_fallecidos = hom_fall) %>%
+  mutate(fecha = as.Date(fecha, format = "%d/%m/%Y")) %>%
+  group_by(mes = format(fecha,"%m")) %>%
+  summarise(mujeres_fallecidas = sum(mujeres_fallecidas), Hombres_fallecidos = sum(Hombres_fallecidos))
+
+fallecidos_por_mes
+
+```
+
+```{r separar_tabla_mujeres}
+# Separar tabla con datos de mujeres para normalizarla
+fallecidos_por_mes$fallecidos = fallecidos_por_mes$mujeres_fallecidas 
+fallecidos_por_mes$sexo ="Mujeres"
+
+fallecidos_mujeres <- data.frame(fallecidos_por_mes$mes, fallecidos_por_mes$fallecidos, fallecidos_por_mes$sexo)
+  
+fallecidos_mujeres
+```
+
+```{r separar_tabla_hombres}
+# Separar tabla con datos de hombre para normalizarla
+fallecidos_por_mes$fallecidos = fallecidos_por_mes$Hombres_fallecidos 
+fallecidos_por_mes$sexo ="Hombres" 
+  
+fallecidos_hombres <- data.frame(fallecidos_por_mes$mes, fallecidos_por_mes$fallecidos, fallecidos_por_mes$sexo)
+
+fallecidos_hombres
+```
+
+```{r tabla-normalizada-fallecidos}
+# Unir las tablas de ambos sexos
+Datos_Fallecidos_Sexo = rbind(fallecidos_mujeres, fallecidos_hombres)
+Datos_Fallecidos_Sexo %>%
+rename(Mes = fallecidos_por_mes.mes,
+         Fallecidos_acumulados = fallecidos_por_mes.fallecidos,
+         Sexo = fallecidos_por_mes.sexo)
+```
+
+```{r grafico-barras-agrupadas}
+# Grafico de barras agrupadas de fallecidos acumulados por mes
+ggplot(
+  Datos_Fallecidos_Sexo, 
+  aes(x = fallecidos_por_mes.mes, y = fallecidos_por_mes.fallecidos, fill = fallecidos_por_mes.sexo)) +
+  geom_col(position = "dodge") +
+  ggtitle("Cantidad de fallecidos acumulada por mes por contagio de COVID-19") +
+  xlab("Mes") +
+  ylab("Cantidad de Fallecidos") +
+  guides(fill = guide_legend(title = "Sexo")) +
+  scale_fill_discrete(labels = c("Hombres", "Mujeres"))
+```

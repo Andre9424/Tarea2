@@ -1,0 +1,301 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Tarea2},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Tarea2}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\hypertarget{carga-de-paquetes}{%
+\subsection{Carga de paquetes}\label{carga-de-paquetes}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# dplyr}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# ggplot2}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{carga-de-datos}{%
+\subsection{Carga de datos}\label{carga-de-datos}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rios }\OtherTok{\textless{}{-}}
+  \FunctionTok{read.csv}\NormalTok{(}\AttributeTok{file =} \StringTok{\textquotesingle{}https://raw.githubusercontent.com/tpb728O{-}programaciongeoespacialr/2021ii/main/datos/hidrologia/fdc/fdc.csv\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{covid }\OtherTok{\textless{}{-}} 
+  \FunctionTok{read.csv}\NormalTok{(}
+    \AttributeTok{file=}\StringTok{\textquotesingle{}https://raw.githubusercontent.com/tpb728O{-}programaciongeoespacialr/2021ii/main/datos/minsalud/covid/ultimafecha\_CSV\_GENERAL.csv\textquotesingle{}}\NormalTok{, }
+    \AttributeTok{sep =} \StringTok{","}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{gruxe1fico-de-barras-apiladas-que-muestre-el-caudal-de-los-ruxedos-pandora-y-bananito-por-cada-uno-de-los-12-meses-del-auxf1o.}{%
+\subsubsection{(40\%) Gráfico de barras apiladas que muestre el caudal
+de los ríos Pandora y Bananito por cada uno de los 12 meses del
+año.}\label{gruxe1fico-de-barras-apiladas-que-muestre-el-caudal-de-los-ruxedos-pandora-y-bananito-por-cada-uno-de-los-12-meses-del-auxf1o.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rios\_caudal\_por\_mes }\OtherTok{\textless{}{-}}
+\NormalTok{  rios }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{rename}\NormalTok{(}\AttributeTok{fecha =}\NormalTok{ Tiempo,}
+         \AttributeTok{pandora =}\NormalTok{ Pandora.mm..637km2.,}
+         \AttributeTok{banano =}\NormalTok{ Banano.mm..90km2.) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{fecha =} \FunctionTok{as.Date}\NormalTok{(fecha, }\AttributeTok{format =} \StringTok{"\%m/\%d/\%Y"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(}\AttributeTok{mes =} \FunctionTok{format}\NormalTok{(fecha,}\StringTok{"\%m"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{pandora =} \FunctionTok{sum}\NormalTok{(pandora), }\AttributeTok{banano =} \FunctionTok{sum}\NormalTok{(banano))}
+
+  
+\NormalTok{rios\_caudal\_por\_mes}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 12 x 3
+##    mes   pandora banano
+##    <chr>   <dbl>  <dbl>
+##  1 01      1523.  4265.
+##  2 02      1240.  3655.
+##  3 03      1243.  2699.
+##  4 04      1275.  3163.
+##  5 05      1392.  4646.
+##  6 06      1898.  5302.
+##  7 07      2484.  6013.
+##  8 08      2441.  4768.
+##  9 09      1567.  4016.
+## 10 10      1710.  4211.
+## 11 11      1776.  5877.
+## 12 12      2442.  6284.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{  rios\_caudal\_por\_mes}\SpecialCharTok{$}\NormalTok{caudal }\OtherTok{=}\NormalTok{ rios\_caudal\_por\_mes}\SpecialCharTok{$}\NormalTok{pandora }
+\NormalTok{  rios\_caudal\_por\_mes}\SpecialCharTok{$}\NormalTok{caudal }\OtherTok{=}\NormalTok{ rios\_caudal\_por\_mes}\SpecialCharTok{$}\NormalTok{banano }
+\NormalTok{  rios\_caudal\_por\_mes}\SpecialCharTok{$}\NormalTok{rio }\OtherTok{=}\StringTok{"pandora"} 
+  
+\NormalTok{  rios\_caudal\_por\_mes}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 12 x 5
+##    mes   pandora banano caudal rio    
+##    <chr>   <dbl>  <dbl>  <dbl> <chr>  
+##  1 01      1523.  4265.  4265. pandora
+##  2 02      1240.  3655.  3655. pandora
+##  3 03      1243.  2699.  2699. pandora
+##  4 04      1275.  3163.  3163. pandora
+##  5 05      1392.  4646.  4646. pandora
+##  6 06      1898.  5302.  5302. pandora
+##  7 07      2484.  6013.  6013. pandora
+##  8 08      2441.  4768.  4768. pandora
+##  9 09      1567.  4016.  4016. pandora
+## 10 10      1710.  4211.  4211. pandora
+## 11 11      1776.  5877.  5877. pandora
+## 12 12      2442.  6284.  6284. pandora
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tabla\_caudal\_pandora }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(rios\_caudal\_por\_mes}\SpecialCharTok{$}\NormalTok{mes, rios\_caudal\_por\_mes}\SpecialCharTok{$}\NormalTok{caudal, rios\_caudal\_por\_mes}\SpecialCharTok{$}\NormalTok{rio)}
+  
+\NormalTok{tabla\_caudal\_pandora}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    rios_caudal_por_mes.mes rios_caudal_por_mes.caudal rios_caudal_por_mes.rio
+## 1                       01                    4265.29                 pandora
+## 2                       02                    3655.17                 pandora
+## 3                       03                    2698.76                 pandora
+## 4                       04                    3162.62                 pandora
+## 5                       05                    4645.85                 pandora
+## 6                       06                    5302.11                 pandora
+## 7                       07                    6012.98                 pandora
+## 8                       08                    4767.59                 pandora
+## 9                       09                    4016.38                 pandora
+## 10                      10                    4210.97                 pandora
+## 11                      11                    5877.39                 pandora
+## 12                      12                    6284.29                 pandora
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rios\_caudal\_por\_mes}\SpecialCharTok{$}\NormalTok{rio }\OtherTok{=}\StringTok{"banano"} 
+  
+\NormalTok{tabla\_caudal\_banano }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(rios\_caudal\_por\_mes}\SpecialCharTok{$}\NormalTok{mes, rios\_caudal\_por\_mes}\SpecialCharTok{$}\NormalTok{caudal, rios\_caudal\_por\_mes}\SpecialCharTok{$}\NormalTok{rio)}
+  
+\NormalTok{tabla\_caudal\_banano}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    rios_caudal_por_mes.mes rios_caudal_por_mes.caudal rios_caudal_por_mes.rio
+## 1                       01                    4265.29                  banano
+## 2                       02                    3655.17                  banano
+## 3                       03                    2698.76                  banano
+## 4                       04                    3162.62                  banano
+## 5                       05                    4645.85                  banano
+## 6                       06                    5302.11                  banano
+## 7                       07                    6012.98                  banano
+## 8                       08                    4767.59                  banano
+## 9                       09                    4016.38                  banano
+## 10                      10                    4210.97                  banano
+## 11                      11                    5877.39                  banano
+## 12                      12                    6284.29                  banano
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Datos\_Caudal\_Rios }\OtherTok{=} \FunctionTok{rbind}\NormalTok{(tabla\_caudal\_pandora, tabla\_caudal\_banano)}
+\FunctionTok{View}\NormalTok{(Datos\_Caudal\_Rios)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}
+\NormalTok{  Datos\_Caudal\_Rios, }
+  \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ rios\_caudal\_por\_mes.mes, }\AttributeTok{y =}\NormalTok{ rios\_caudal\_por\_mes.caudal, }\AttributeTok{fill =}\NormalTok{ rios\_caudal\_por\_mes.rio)}
+\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ggtitle}\NormalTok{(}\StringTok{"Caudal acumulado por mes de los rios Pandora y Banano desde 1973 hasta 1983"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{xlab}\NormalTok{(}\StringTok{"Mes"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ylab}\NormalTok{(}\StringTok{"Caudal m³/s"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{index_files/figure-latex/grafico-barras-apiladas-1.pdf}
+
+\end{document}
